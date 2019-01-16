@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from os import path
-from setuptools import setup, find_packages
+from setuptools import setup
+# from setuptools import find_packages
 
 NAME = 'gopen'
+MODULES = ['gopen', ]
 VERSION_FILE = 'version.json'
 SETUP_REQUIRES = []
-INSTALL_REQUIRES = ['six', 'python-magic']
-EXTRAS_REQUIRES = {'test': ['pytest', 'pytest-pep8']}
+INSTALL_REQUIRES = []
+EXTRAS_REQUIRES = {'test': ['pytest']}
 
 
 def get_version(source):
@@ -24,7 +26,7 @@ def get_version(source):
 def get_long_description(here):
     """Get the long description from the README file."""
     import codecs
-    with codecs.open(path.join(here, 'README.md'), encoding='utf-8') as _rf:
+    with codecs.open(path.join(here, 'README.rst'), encoding='utf-8') as _rf:
         return _rf.read()
 
 
@@ -35,16 +37,16 @@ LONG_DESCRIPTION = get_long_description(HERE)
 setup(
     name=NAME,
     version=VERSION,
-    description='Generic opener',
+    description='A template project with packages',
     long_description=LONG_DESCRIPTION,
     author='Simone Marsili',
     author_email='simo.marsili@gmail.com',
-    url='https://github.com/simomarsili/gopen',
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    # packages=['skmsa'],
+    url='https://github.com/simomarsili/'+NAME,
+    py_modules=MODULES,
+    # packages=find_packages(exclude=['tests']),
     package_data={'':
                   ['LICENSE.txt',
-                   'README.md',
+                   'README.rst',
                    'requirements.txt']},
     include_package_data=True,
     setup_requires=SETUP_REQUIRES,
