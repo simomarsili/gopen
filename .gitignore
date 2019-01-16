@@ -11,6 +11,9 @@ TODO
 MANIFEST
 tests
 tests/*
-!tests/test_template.py
+!tests/test_basic.py
+!tests/txt
+!tests/txt.gz
+!tests/txt.bz2
 build/*
 dist/*
