@@ -7,7 +7,7 @@ NAME = 'gopen'
 MODULES = ['gopen', ]
 VERSION_FILE = 'version.json'
 SETUP_REQUIRES = []
-INSTALL_REQUIRES = []
+INSTALL_REQUIRES = ['six', 'python-magic']
 EXTRAS_REQUIRES = {'test': ['pytest']}
 
 
