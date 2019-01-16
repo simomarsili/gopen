@@ -1,0 +1,13 @@
+*~
+*#
+*.pyc
+.cache
+.pytest_cache
+.tox
+venv
+TODO
+MANIFEST
+tests/*
+!tests/test_template.py
+build/*
+dist/*
