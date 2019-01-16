@@ -3,6 +3,15 @@ from contextlib import contextmanager
 
 @contextmanager
 def gopen(source):
+    """Context manager for readable files.
+
+    Usage:
+    >>> import gopen
+    >>> with gopen.gopen(`source`) as f:
+    >>>     <do something with f>
+    `source` can be: a file-like object, a valid filename, a file descriptor.
+    If `source` is a file-like object, do not close it.
+    """
     import io
     import six
     import codecs
