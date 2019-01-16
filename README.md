@@ -1,0 +1,2 @@
+# gopen
+generic open
