@@ -1,3 +1,4 @@
+"""Provides gopen function."""
 from contextlib import contextmanager
 
 
@@ -8,7 +9,7 @@ def gopen(source):
     Usage:
     >>> import gopen
     >>> with gopen.gopen(`source`) as f:
-    >>>     <do something with f>
+    >>>     <do something with f>
     `source` can be: a file-like object, a valid filename, a file descriptor.
     If `source` is a file-like object, do not close it.
     """
@@ -26,7 +27,7 @@ def gopen(source):
                 raise OSError('Cant open file file descriptor %s', source)
         elif isinstance(source, six.string_types):  # a filename
             try:
-                ftype = filetype(source)
+                ftype = _filetype(source)
             except IOError:
                 raise IOError('File: %s not found', source)
             else:
@@ -47,6 +48,7 @@ def gopen(source):
         handle.close()
 
 
-def filetype(filename):
-    import magic
+def _filetype(filename):
+    """Return the file type of `filename`."""
+    import magic  # pylint: disable=import-error
     return magic.from_file(filename).split()[0]
