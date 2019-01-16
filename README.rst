@@ -1,4 +1,5 @@
-============
-project_name
-============
-project_name provides package package_name.
+=====
+gopen
+=====
+Provides a factory function for "with: context managers
+for readable file objects.
