@@ -29,6 +29,8 @@ def gopen(source):
                 elif ftype == 'bzip2':
                     from bz2 import BZ2File
                     handle = codecs.getreader('utf-8')(BZ2File(source, 'r'))
+                else:
+                    raise TypeError('Invalid filetype (%s)' % ftype)
         else:
             raise TypeError('Expected {str, int, file-like}, '
                             'got %s' % type(source))
