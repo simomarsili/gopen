@@ -1,5 +1,25 @@
-"""Provides gopen function."""
+"""gopen, gread function."""
 from contextlib import contextmanager
+
+
+def get_version():
+    import os
+    import json
+    path_to_version = os.path.join(os.path.dirname(__file__), 'version.json')
+    with open(path_to_version, 'r') as f:
+        version_data = json.load(f)
+        try:
+            return version_data['version']
+        except KeyError:
+            # no version number in version.json
+            raise KeyError('check version file: no version number')
+
+
+__version__ = get_version()
+__copyright__ = 'Copyright (C) 2019 Simone Marsili'
+__license__ = 'BSD 3 clause'
+__author__ = 'Simone Marsili (simo.marsili@gmail.com)'
+__all__ = ['gopen', 'gread']
 
 
 @contextmanager
@@ -48,7 +68,7 @@ def gopen(source):
         handle.close()
 
 
-def read(source):
+def gread(source):
     with gopen(source) as f:
         for line in f:
             yield line
