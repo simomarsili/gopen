@@ -48,6 +48,12 @@ def gopen(source):
         handle.close()
 
 
+def read(source):
+    with gopen(source) as f:
+        for line in f:
+            yield line
+
+
 def _filetype(filename):
     """Return the file type of `filename`."""
     import magic  # pylint: disable=import-error
