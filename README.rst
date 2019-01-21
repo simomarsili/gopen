@@ -1,25 +1,17 @@
 =====
 gopen
 =====
-Tools for reading text from:
+Provides the **gopen.gread()** function. Basic usage::
 
-- readable file objects 
-- pathnames
-- integer file descriptors
-- gzip, bzip2 compressed files
+  >>> from gopen import gread
+  >>> lines = gread(source)
+  >>> lines
+  <generator object gread at 0x7f45752ebf10>
 
-using a common interface.
+**gread** returns an interator over text input lines.
 
-The gopen module provides two functions:
-
-- gopen()
-  Provides a factory function for "with" context managers
-  for readable file objects::
-
-    >>> with gopen.gopen(source) as f:
-    >>>     <do something with f>
-
-- gopen.gread()
-
+Valid inputs are: readable file objects,
+integer file descriptors, file pathnames.
+gzip and bzip2-compressed files will be decompressed on the fly.
 No side effects: if a file descriptor or a file handle is given,
 it will not be closed.
