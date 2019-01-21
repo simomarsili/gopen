@@ -6,7 +6,6 @@ STRING = 'qux\nquux\nquuz\n'
 
 def _compress(path, compressor):
     import subprocess
-    import os.path
     extension = {'gzip': '.gz', 'bzip2': '.bz2'}
     if compressor in extension:
         subprocess.check_call('%s %s' % (compressor, path), shell=True)
