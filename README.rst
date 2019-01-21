@@ -1,12 +1,14 @@
 =====
 gopen
 =====
-Tools for reading from "generic" objects.
+Tools for reading text from:
 
+- readable file objects 
 - pathnames
 - integer file descriptors
-- readable file objects 
 - gzip, bzip2 compressed files
+
+using a common interface.
 
 The gopen module provides two functions:
 
@@ -19,4 +21,5 @@ The gopen module provides two functions:
 
 - gopen.gread()
 
-If a file descriptor or a file handle is given, it won't be closed.
+No side effects: if a file descriptor or a file handle is given,
+it will not be closed.
