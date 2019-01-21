@@ -1,10 +1,17 @@
 =====
 gopen
 =====
-Provides a factory function for "with" context managers
-for readable file objects::
+Provides the **gopen.gread()** function. Basic usage::
 
-  >>> with gopen.gopen(source) as f:
-  >>>     <do something with f>
+  >>> from gopen import gread
+  >>> lines = gread(source)
+  >>> lines
+  <generator object gread at 0x7f45752ebf10>
 
-No side effects: if `source` is file-like and not closed, it won't be closed.
+**gread** returns an interator over text input lines.
+
+Valid inputs are: readable file objects,
+integer file descriptors, file pathnames.
+gzip and bzip2-compressed files will be decompressed on the fly.
+No side effects: if a file descriptor or a file handle is given,
+it will not be closed.
