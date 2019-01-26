@@ -12,7 +12,7 @@ __all__ = ['gopen', 'gread']
 
 
 @contextmanager
-def gopen(source):
+def ropen(source, encoding=None):
     """Context manager for readable files.
 
     Usage:
@@ -22,16 +22,20 @@ def gopen(source):
     `source` can be: a file-like object, a valid filename, a file descriptor.
     If `source` is a file-like object, do not close it.
     """
-    import io
     import six
     import codecs
+    import locale
+
+    if encoding is None:
+        encoding = locale.getpreferredencoding(False)
 
     if hasattr(source, 'read'):
-        yield source  # yield the handle without closing
+        yield source  # yield the handle without closing it
     else:  # set handle or raise an exception
         if isinstance(source, int):  # file descriptor
             try:
-                handle = io.open(source, 'r', closefd=False)
+                # do not close the file descriptos
+                handle = open(source, 'r', encoding=encoding, closefd=False)
             except OSError:
                 raise OSError('Cant open file file descriptor %s', source)
         elif isinstance(source, six.string_types):  # a filename
@@ -44,14 +48,14 @@ def gopen(source):
                     # compressed
                     if ftype == 'gzip':
                         import gzip
-                        handle = codecs.getreader('utf-8')(
+                        handle = codecs.getreader(encoding)(
                             gzip.open(source, 'r'))
                     elif ftype == 'bzip2':
                         from bz2 import BZ2File
-                        handle = codecs.getreader('utf-8')(
+                        handle = codecs.getreader(encoding)(
                             BZ2File(source, 'r'))
                 else:
-                    handle = open(source, 'r')
+                    handle = open(source, 'r', encoding=encoding)
                     # raise TypeError('Invalid filetype (%s)' % ftype)
         else:
             raise TypeError('Expected {str, int, file-like}, '
@@ -60,8 +64,8 @@ def gopen(source):
         handle.close()
 
 
-def gread(source):
-    with gopen(source) as f:
+def gread(source, encoding=None):
+    with ropen(source, encoding=encoding) as f:
         for line in f:
             yield line
 
