@@ -40,16 +40,19 @@ def gopen(source):
             except IOError:
                 raise IOError('File: %s not found', source)
             else:
-                if ftype == 'ASCII':
-                    handle = open(source, 'r')
-                elif ftype == 'gzip':
-                    import gzip
-                    handle = codecs.getreader('utf-8')(gzip.open(source, 'r'))
-                elif ftype == 'bzip2':
-                    from bz2 import BZ2File
-                    handle = codecs.getreader('utf-8')(BZ2File(source, 'r'))
+                if ftype in ['gzip', 'bzip2']:
+                    # compressed
+                    if ftype == 'gzip':
+                        import gzip
+                        handle = codecs.getreader('utf-8')(
+                            gzip.open(source, 'r'))
+                    elif ftype == 'bzip2':
+                        from bz2 import BZ2File
+                        handle = codecs.getreader('utf-8')(
+                            BZ2File(source, 'r'))
                 else:
-                    raise TypeError('Invalid filetype (%s)' % ftype)
+                    handle = open(source, 'r')
+                    # raise TypeError('Invalid filetype (%s)' % ftype)
         else:
             raise TypeError('Expected {str, int, file-like}, '
                             'got %s' % type(source))
