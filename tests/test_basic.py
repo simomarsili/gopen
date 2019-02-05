@@ -41,11 +41,11 @@ def tmp_file():
 
 def test_basic(tmp_file):
     file_path = tmp_file['file']
-    with gopen.ropen(file_path) as fp:
+    with gopen.readable(file_path) as fp:
         assert fp.read() == STRING
 
 
 def test_file_descriptor(tmp_file):
     fd = tmp_file['fd']
-    with gopen.ropen(fd) as fp:
+    with gopen.readable(fd) as fp:
         assert fp.read() == STRING
