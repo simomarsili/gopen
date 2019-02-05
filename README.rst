@@ -19,6 +19,7 @@ Provides the **gopen.readable()** and **gopen.gread()** functions.
 * a readable file object,
 * a file descriptor and
 * a file pathname.
+
 gzip and bzip2-compressed files will be decompressed on the fly.
 No side effects: if a file descriptor or a file handle is given,
 it will not be closed.
