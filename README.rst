@@ -2,12 +2,13 @@
 gopen
 =====
 Provides the **gopen.readable()** and **gopen.gread()** functions.
+
 **readable(source)** returns a context manager that supports `with` statements::
 
   >>> with gopen.readable(source) as f:
   >>>     <read from f>
 
-**gread(source)** returns an interator over input lines.
+**gread(source)** returns an interator over input lines::
 
   >>> from gopen import gread
   >>> lines = gread(source)
