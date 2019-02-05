@@ -8,11 +8,11 @@ __version__ = pkg_resources.require(project_name)[0].version
 __copyright__ = 'Copyright (C) 2019 Simone Marsili'
 __license__ = 'BSD 3 clause'
 __author__ = 'Simone Marsili (simo.marsili@gmail.com)'
-__all__ = ['gopen', 'gread']
+__all__ = ['readable', 'gread']
 
 
 @contextmanager
-def ropen(source, encoding=None):
+def readable(source, encoding=None):
     """Context manager for readable files.
 
     Usage:
@@ -65,7 +65,8 @@ def ropen(source, encoding=None):
 
 
 def gread(source, encoding=None):
-    with ropen(source, encoding=encoding) as f:
+    with readable(source, encoding=encoding) as f:
+        return f.read()
         for line in f:
             yield line
 
