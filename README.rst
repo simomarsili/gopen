@@ -16,6 +16,7 @@ Provides the **gopen.readable()** and **gopen.gread()** functions.
   <generator object gread at 0x7f45752ebf10>
 
 **<source>** can be:
+
 * a readable file object,
 * a file descriptor and
 * a file pathname.
