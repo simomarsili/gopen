@@ -66,7 +66,6 @@ def readable(source, encoding=None):
 
 def gread(source, encoding=None):
     with readable(source, encoding=encoding) as f:
-        return f.read()
         for line in f:
             yield line
 
