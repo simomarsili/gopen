@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
+"""Setup module."""
 from os import path
+
 from setuptools import setup
+
 # from setuptools import find_packages
 
 NAME = 'gopen'
-MODULES = ['gopen', ]
+MODULES = [
+    'gopen',
+]
 VERSION_FILE = 'version.json'
 SETUP_REQUIRES = []
 INSTALL_REQUIRES = ['six', 'python-magic']
@@ -20,7 +25,7 @@ def get_version(source):
         return version_data['version']
     except KeyError:
         # no version number in version.json
-        raise KeyError("check version file: no version number")
+        raise KeyError('check version file: no version number')
 
 
 def get_long_description(here):
@@ -41,13 +46,10 @@ setup(
     long_description=LONG_DESCRIPTION,
     author='Simone Marsili',
     author_email='simo.marsili@gmail.com',
-    url='https://github.com/simomarsili/'+NAME,
+    url='https://github.com/simomarsili/' + NAME,
     py_modules=MODULES,
     # packages=find_packages(exclude=['tests']),
-    package_data={'':
-                  ['LICENSE.txt',
-                   'README.rst',
-                   'requirements.txt']},
+    package_data={'': ['LICENSE.txt', 'README.rst', 'requirements.txt']},
     include_package_data=True,
     setup_requires=SETUP_REQUIRES,
     install_requires=INSTALL_REQUIRES,

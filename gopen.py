@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 """gopen, gread function."""
-from contextlib import contextmanager
-import pkg_resources
 import logging
+from contextlib import contextmanager
+
+import pkg_resources
 
 project_name = 'gopen'
 __version__ = pkg_resources.require(project_name)[0].version
@@ -14,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 @contextmanager
-def readable(source, encoding=None):
+def readable(source, encoding=None):  # pylint: disable=too-many-branches
     """Context manager for readable files.
 
     Usage:
@@ -39,23 +41,23 @@ def readable(source, encoding=None):
                 # do not close the file descriptos
                 handle = open(source, 'r', encoding=encoding, closefd=False)
             except OSError:
-                raise OSError('Cant open file file descriptor %s', source)
+                raise OSError('Cant open file file descriptor %s' % source)
         elif isinstance(source, six.string_types):  # a filename
             try:
                 ftype = _filetype(source)
             except IOError:
-                raise IOError('File: %s not found', source)
+                raise IOError('File: %s not found' % source)
             else:
                 if ftype in ['gzip', 'bzip2']:
                     # compressed
                     if ftype == 'gzip':
                         import gzip
-                        handle = codecs.getreader(encoding)(
-                            gzip.open(source, 'r'))
+                        handle = codecs.getreader(encoding)(gzip.open(
+                            source, 'r'))
                     elif ftype == 'bzip2':
                         from bz2 import BZ2File
-                        handle = codecs.getreader(encoding)(
-                            BZ2File(source, 'r'))
+                        handle = codecs.getreader(encoding)(BZ2File(
+                            source, 'r'))
                 else:
                     handle = open(source, 'r', encoding=encoding)
                     # raise TypeError('Invalid filetype (%s)' % ftype)
@@ -67,6 +69,7 @@ def readable(source, encoding=None):
 
 
 def gread(source, encoding=None):
+    """Return a generator of lines from source."""
     with readable(source, encoding=encoding) as f:
         for line in f:
             yield line

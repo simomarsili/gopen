@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+"""Tests module."""
+# pylint: disable=missing-docstring
 import os
+
 import pytest
+
 import gopen
+
 STRING = 'qux\nquux\nquuz\n'
 
 
@@ -21,16 +27,17 @@ def _test_dir():
     basename = os.path.basename(cwd)
     if basename == 'tests':
         return cwd
-    else:
-        test_dir = os.path.join(cwd, 'tests')
-        if os.path.exists(test_dir):
-            return test_dir
+
+    test_dir = os.path.join(cwd, 'tests')
+    if os.path.exists(test_dir):
+        return test_dir
+
+    return None
 
 
 @pytest.fixture()
 def tmp_file():
     import tempfile
-    import os
     fd, fpath = tempfile.mkstemp(text=True)
     with open(fpath, 'w') as f:
         print(STRING, file=f, end='')
@@ -39,13 +46,13 @@ def tmp_file():
     os.remove(fpath)
 
 
-def test_basic(tmp_file):
+def test_basic(tmp_file):  # pylint: disable=redefined-outer-name
     file_path = tmp_file['file']
     with gopen.readable(file_path) as fp:
         assert fp.read() == STRING
 
 
-def test_file_descriptor(tmp_file):
+def test_file_descriptor(tmp_file):  # pylint: disable=redefined-outer-name
     fd = tmp_file['fd']
     with gopen.readable(fd) as fp:
         assert fp.read() == STRING
