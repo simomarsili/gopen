@@ -24,3 +24,9 @@ Provides the **gopen.readable()** and **gopen.gread()** functions.
 gzip and bzip2-compressed files will be decompressed on the fly.
 No side effects: if `source` is a file descriptor or a file handle,
 it will not be closed.
+
+Changes
+=======
+0.8 (2019-05-27)
+----------------
+- Python3 only (>= 3.4)
