@@ -8,9 +8,14 @@ matrix:
     - python: 3.4
       env: TOXENV=py34
 # before_install:
-#   - sudo apt-get install <package>
-#   - pip install <package>
+#   - sudo apt-get install packageA
+#   - pip install packageB
 install:
   - pip install tox
 script:
   - tox
+# safelist
+branches:
+  only:
+  - master
+  - develop
