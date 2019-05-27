@@ -42,7 +42,7 @@ LONG_DESCRIPTION = get_long_description(HERE)
 setup(
     name=NAME,
     version=VERSION,
-    description='A template project with packages',
+    description='A generic context manager for readable files.',
     long_description=LONG_DESCRIPTION,
     author='Simone Marsili',
     author_email='simo.marsili@gmail.com',
@@ -59,9 +59,8 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
