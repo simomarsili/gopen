@@ -42,7 +42,7 @@ LONG_DESCRIPTION = get_long_description(HERE)
 setup(
     name=NAME,
     version=VERSION,
-    description='A template project with packages',
+    description='A generic context manager for readable files.',
     long_description=LONG_DESCRIPTION,
     author='Simone Marsili',
     author_email='simo.marsili@gmail.com',

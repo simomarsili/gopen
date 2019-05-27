@@ -8,7 +8,7 @@ Provides the **gopen.readable()** and **gopen.gread()** functions.
   >>> with gopen.readable(source) as f:
   >>>     <read from f>
 
-**gread(source)** returns an interator over input lines::
+**gread(source)** returns an iterator over input lines::
 
   >>> from gopen import gread
   >>> lines = gread(source)
