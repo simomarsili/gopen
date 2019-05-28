@@ -44,23 +44,23 @@ def readable(source, encoding=None):  # pylint: disable=too-many-branches
                 raise OSError('Cant open file file descriptor %s' % source)
         elif isinstance(source, six.string_types):  # a filename
             try:
-                ftype = _filetype(source)
+                mimetype = _mimetype(source).split('/')[1]
             except IOError:
                 raise IOError('File: %s not found' % source)
             else:
-                if ftype in ['gzip', 'bzip2']:
+                if mimetype in ['gzip', 'x-bzip2']:
                     # compressed
-                    if ftype == 'gzip':
+                    if mimetype == 'gzip':
                         import gzip
                         handle = codecs.getreader(encoding)(gzip.open(
                             source, 'r'))
-                    elif ftype == 'bzip2':
+                    elif mimetype == 'x-bzip2':
                         from bz2 import BZ2File
                         handle = codecs.getreader(encoding)(BZ2File(
                             source, 'r'))
                 else:
                     handle = open(source, 'r', encoding=encoding)
-                    # raise TypeError('Invalid filetype (%s)' % ftype)
+                    # raise TypeError('Invalid filetype (%s)' % mimetype)
         else:
             raise TypeError('Expected {str, int, file-like}, '
                             'got %s' % type(source))
@@ -75,7 +75,8 @@ def gread(source, encoding=None):
             yield line
 
 
-def _filetype(filename):
-    """Return the file type of `filename`."""
+def _mimetype(source):
+    """Return the mime type of source."""
     import magic  # pylint: disable=import-error
-    return magic.from_file(filename).split()[0]
+    mime = magic.Magic(mime=True)
+    return mime.from_file(source)
