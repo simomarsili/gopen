@@ -25,6 +25,19 @@ gzip and bzip2-compressed files will be decompressed on the fly.
 No side effects: if `source` is a file descriptor or a file handle,
 it will not be closed.
 
+Example::
+
+  >>> f = open('txt', 'r')
+  >>> for source in ['txt', 'txt.gz', 'txt.bz2', f]:
+  ...     print('%r (%r)' % (list(gread(source)), source))
+  ...
+  ['Simple is\n', 'better than complex.'] ('txt')
+  ['Simple is\n', 'better than complex.'] ('txt.gz')
+  ['Simple is\n', 'better than complex.'] ('txt.bz2')
+  ['Simple is\n', 'better than complex.'] (<_io.TextIOWrapper name='txt' mode='r' encoding='UTF-8'>)
+  >>> f.closed
+  False
+
 Changes
 =======
 0.6 (2019-05-27)

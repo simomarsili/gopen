@@ -7,7 +7,7 @@ import pytest
 
 import gopen
 
-STRING = 'qux\nquux\nquuz\n'
+STRING = 'Simple is\nbetter than complex.'
 
 
 def _compress(path, compressor):
