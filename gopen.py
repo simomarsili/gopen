@@ -75,8 +75,13 @@ def gread(source, encoding=None):
             yield line
 
 
-def _mimetype(source):
+def _mimetype(source, codec=False, uncompress=False):
     """Return the mime type of source."""
     import magic  # pylint: disable=import-error
-    mime = magic.Magic(mime=True)
-    return mime.from_file(source)
+    mime = magic.Magic(mime=True, mime_encoding=True, uncompress=uncompress)
+    result = mime.from_file(source)
+    mtype = result.split(';')[0]
+    codec = result.split('=')[1]
+    if codec:
+        return mtype, codec
+    return mtype
