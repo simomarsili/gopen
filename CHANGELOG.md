@@ -1,6 +1,8 @@
 # Change log
 
 ## [Unreleased]
+### Fixed
+- `readable` function (_mimetype)
 
 ## [0.6] - 2019-05-27
 ### Changed
