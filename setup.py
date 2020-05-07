@@ -10,7 +10,7 @@ NAME = 'gopen'
 MODULES = [
     'gopen',
 ]
-VERSION_FILE = 'version.json'
+PACKAGE_FILE = 'package.json'
 SETUP_REQUIRES = []
 INSTALL_REQUIRES = ['six', 'python-magic']
 EXTRAS_REQUIRES = {'test': ['pytest']}
@@ -24,7 +24,7 @@ def get_version(source):
     try:
         return version_data['version']
     except KeyError:
-        # no version number in version.json
+        # no version number in package.json
         raise KeyError('check version file: no version number')
 
 
@@ -36,7 +36,7 @@ def get_long_description(here):
 
 
 HERE = path.abspath(path.dirname(__file__))
-VERSION = get_version(path.join(HERE, VERSION_FILE))
+VERSION = get_version(path.join(HERE, PACKAGE_FILE))
 LONG_DESCRIPTION = get_long_description(HERE)
 
 setup(
